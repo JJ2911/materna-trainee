@@ -15,6 +15,10 @@ public class Player {
   public Player() {
   }
 
+  public int getMAX_CANDIES() {
+    return MAX_CANDIES;
+  }
+
   public int getCash() {
     return cash;
   }
@@ -47,6 +51,10 @@ public class Player {
     return bank;
   }
 
+  public List<Candy> getCandies() {
+    return candies;
+  }
+
   public void buy(Candy.CandyType candyType, int quantity, int price) {
     if (quantity < 1) {
       System.out.println("Quantity must be greater than 0.");
@@ -60,13 +68,21 @@ public class Player {
         for (Candy candy : candies) {
           if (candy.getCandyType() == candyType) {
             candy.setQuantity(candy.getQuantity() + quantity);
-            break;
+            System.out.printf(
+                    "Your purchase of %d %s was successful.%n",
+                    quantity,
+                    candyType.getName()
+            );
+            return;
           }
         }
 
-        Candy newCandy = new Candy(candyType, quantity);
-        candies.add(newCandy);
-        System.out.printf("Your purchase of %dx %s was successful.%n", quantity, newCandy.getName());
+        candies.add(new Candy(candyType, quantity));
+        System.out.printf(
+                "Your purchase of %d %s was successful.%n",
+                quantity,
+                candyType.getName()
+        );
       } else {
         System.out.println("Insufficient funds.");
       }
@@ -86,7 +102,7 @@ public class Player {
         if (quantity <= candy.getQuantity()) {
           candy.setQuantity(candy.getQuantity() - quantity);
           cash += quantity * price;
-          System.out.printf("Your sale of %dx %s was successful.%n", quantity, candy.getName());
+          System.out.printf("Your sale of %d %s was successful.%n", quantity, candy.getName());
 
           if (candy.getQuantity() == 0) {
             candies.remove(candy);
@@ -113,6 +129,7 @@ public class Player {
       city.setLocation(location);
       cash -= price;
       day += 1;
+      RandomGameEvents.next().process(this);
     } else {
       System.out.println("Insufficient funds.");
     }
