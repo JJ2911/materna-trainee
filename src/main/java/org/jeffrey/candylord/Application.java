@@ -1,5 +1,7 @@
 package org.jeffrey.candylord;
 
+import org.jeffrey.candylord.util.DistanceUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

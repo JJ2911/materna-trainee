@@ -1,4 +1,6 @@
-package org.jeffrey.candylord;
+package org.jeffrey.candylord.util;
+
+import org.jeffrey.candylord.City;
 
 public class DistanceUtils {
   private static final double pricePerKm = 0.10;
