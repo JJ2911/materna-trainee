@@ -6,7 +6,7 @@ import org.jeffrey.candylord.Player;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Luck extends Event {
-  private final int maxFoundCandies = 10;
+  private final int MAX_FOUND_CANDIES = 10;
 
   @Override
   public void process(Player player) {
@@ -36,9 +36,9 @@ public class Luck extends Event {
       candyType = Candy.CandyType.MMS;
     }
 
-    int quantity = current.nextInt(1, maxFoundCandies + 1);
+    int quantity = current.nextInt(1, MAX_FOUND_CANDIES + 1);
 
-    if (player.sumOfCandies() + quantity < player.getMAX_CANDIES() + maxFoundCandies) {
+    if (player.sumOfCandies() + quantity < player.getMAX_CANDIES() + MAX_FOUND_CANDIES) {
       if (!(player.sumOfCandies() + quantity <= player.getMAX_CANDIES())) {
         quantity = quantity - (player.sumOfCandies() + quantity - player.getMAX_CANDIES());
       }
