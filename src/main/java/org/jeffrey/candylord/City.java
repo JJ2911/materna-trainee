@@ -7,7 +7,7 @@ public class City {
     LAS_VEGAS("Las Vegas", 36.1716, 115.1391),
     LOS_ANGELES("Los Angeles", 34.0522, 118.2437),
     MIAMI("Miami", 25.7617, 80.1918),
-    BRONX("Bronx", 40.8448, 73.8648),
+    BRONX("The Bronx", 40.8448, 73.8648),
     SAN_DIEGO("San Diego", 32.7157, 117.1611),
     WASHINGTON_DC("Washington D.C.", 38.9072, 77.0369);
 
@@ -31,6 +31,10 @@ public class City {
 
     public double getLon() {
       return lon;
+    }
+
+    public static boolean isInBronx(Player player) {
+      return player.getCity().getLocation() == BRONX;
     }
   }
 

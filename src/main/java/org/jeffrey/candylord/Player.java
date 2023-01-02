@@ -131,6 +131,7 @@ public class Player {
       city.setLocation(location);
       cash -= price;
       day += 1;
+      bank.calculateBalance();
       RandomGameEvents.next().process(this);
     } else {
       System.out.println("Insufficient funds.");

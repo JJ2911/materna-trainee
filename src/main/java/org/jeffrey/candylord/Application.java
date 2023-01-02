@@ -153,7 +153,7 @@ public class Application {
       System.out.println();
       System.out.printf("%29s%33s%n", "(B)uy Candies", "(V)isit the Bank");
       System.out.printf("%30s%28s%n", "(S)ell Candies", "(L)oan Shark");
-      System.out.printf("%38s%n", "(M)ove to another city");
+      System.out.printf("%38s%15s%n", "(M)ove to another city", "S(t)ash");
 
       String input = scanner.next();
 
@@ -234,6 +234,26 @@ public class Application {
             player.travelTo(location, travelPrices.get(location));
           } else {
             System.out.println("Not a city");
+          }
+        }
+        case "v" -> {
+          System.out.printf("%46s%n", "(D)eposit money");
+          System.out.printf("%47s%n", "(W)ithdraw money");
+
+          String bankAction = scanner.next();
+          boolean deposit = bankAction.equalsIgnoreCase("d");
+          boolean withdraw = bankAction.equalsIgnoreCase("w");
+
+          if (deposit || withdraw) {
+            System.out.printf("How much are you %s? ", deposit ? "depositing" : "withdrawing");
+
+            int amount = scanner.nextInt();
+
+            if (deposit) {
+              player.getBank().deposit(player, amount);
+            } else {
+              player.getBank().withdraw(player, amount);
+            }
           }
         }
         case "q" -> {
