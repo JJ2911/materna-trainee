@@ -1,4 +1,7 @@
-package org.jeffrey.candylord;
+package org.jeffrey.candylord.event;
+
+import org.jeffrey.candylord.Candy;
+import org.jeffrey.candylord.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
 

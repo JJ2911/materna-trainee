@@ -1,5 +1,7 @@
 package org.jeffrey.candylord;
 
+import org.jeffrey.candylord.event.RandomGameEvents;
+
 import java.util.ArrayList;
 import java.util.List;
 

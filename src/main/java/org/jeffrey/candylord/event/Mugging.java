@@ -1,4 +1,6 @@
-package org.jeffrey.candylord;
+package org.jeffrey.candylord.event;
+
+import org.jeffrey.candylord.Player;
 
 public class Mugging extends Event {
   @Override
