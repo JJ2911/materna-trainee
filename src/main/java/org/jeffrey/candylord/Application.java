@@ -24,6 +24,7 @@ public class Application {
     final String marsCandyName = Candy.CandyType.MARS.getName();
 
     Player player = new Player();
+    LoanShark loanShark = new LoanShark();
     City city = player.getCity();
     String currentLocation = "";
     Map<City.Location, Integer> travelPrices = new HashMap<>();
@@ -299,6 +300,26 @@ public class Application {
               }
             } else {
               System.out.println("Not a candy");
+            }
+          }
+        }
+        case "l" -> {
+          System.out.printf("%49s%n", "(B)orrow some cash.");
+          System.out.printf("%44s%n", "(P)ay me back.");
+
+          String loanSharkAction = scanner.next();
+          boolean borrow = loanSharkAction.equalsIgnoreCase("b");
+          boolean pay = loanSharkAction.equalsIgnoreCase("p");
+
+          if (borrow || pay) {
+            System.out.printf("How much do you want to %s?%n", borrow ? "borrow" : "pay back");
+
+            int amount = scanner.nextInt();
+
+            if (borrow) {
+              loanShark.getLoan(player, amount);
+            } else {
+              loanShark.payOffLoan(player, amount);
             }
           }
         }

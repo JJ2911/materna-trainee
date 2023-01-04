@@ -129,6 +129,7 @@ public class Player {
       cash -= price;
       day += 1;
       bank.calculateBalance();
+      debt *= LoanShark.INTEREST_RATE / 100 + 1;
       RandomGameEvents.next().process(this);
     } else {
       System.out.println("Insufficient funds.");
