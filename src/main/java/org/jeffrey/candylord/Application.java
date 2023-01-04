@@ -160,14 +160,17 @@ public class Application {
       switch (input.trim().toLowerCase()) {
         case "b", "s" -> {
           boolean buy = input.equalsIgnoreCase("b");
-          int index = 1;
 
-          System.out.printf("%43s%n", "CANDIES");
-          System.out.printf("%49s%n", "─".repeat(19));
+          System.out.printf("%42s%n", "CANDIES");
+          System.out.printf("%49s%n", "─".repeat(20));
 
           for (Candy.CandyType candyType : Candy.CandyType.values()) {
-            System.out.printf("%s%d. %s%n", " ".repeat(32), index, candyType.getName());
-            index++;
+            System.out.printf(
+                    "%s%2d. %s%n",
+                    " ".repeat(31),
+                    candyType.ordinal() + 1,
+                    candyType.getName()
+            );
           }
 
           System.out.printf(
@@ -197,8 +200,6 @@ public class Application {
           }
         }
         case "m" -> {
-          int index = 1;
-
           if (!currentLocation.equalsIgnoreCase(player.location())) {
             for (City.Location location : City.Location.values()) {
               travelPrices.put(
@@ -219,11 +220,10 @@ public class Application {
             System.out.printf(
                     "%s%d. %-18s%3d%n",
                     " ".repeat(27),
-                    index,
+                    location.ordinal() + 1,
                     location.getName(),
                     travelPrices.get(location)
             );
-            index++;
           }
 
           System.out.println("Where do you want to go?");
@@ -253,6 +253,52 @@ public class Application {
               player.getBank().deposit(player, amount);
             } else {
               player.getBank().withdraw(player, amount);
+            }
+          }
+        }
+        case "t" -> {
+          System.out.printf("%41s%n", "Stash");
+          System.out.printf("%52s%n", "─".repeat(26));
+
+          if (player.getStash().getCandies().isEmpty()) {
+            System.out.printf("%42s%n", "Empty");
+          } else {
+            for (Candy candy : player.getStash().getCandies()) {
+              System.out.printf(
+                      "%s%2d. %-14s%4d%n",
+                      " ".repeat(28),
+                      candy.getCandyType().ordinal() + 1,
+                      candy.getName(),
+                      candy.getQuantity()
+              );
+            }
+          }
+
+          System.out.printf("%n%46s%n", "(D)eposit candy");
+          System.out.printf("%47s%n", "(W)ithdraw candy");
+
+          String stashAction = scanner.next();
+          boolean deposit = stashAction.equalsIgnoreCase("d");
+          boolean withdraw = stashAction.equalsIgnoreCase("w");
+
+          if (deposit || withdraw) {
+            System.out.printf("Which candy are you %s? ", deposit ? "depositing" : "withdrawing");
+
+            int candyNumber = scanner.nextInt();
+
+            if (candyNumber >= 1 && candyNumber <= 10) {
+              System.out.printf("How many are you %s? ", deposit ? "depositing" : "withdrawing");
+
+              Candy.CandyType candyType = Candy.CandyType.values()[candyNumber - 1];
+              int candyQuantity = scanner.nextInt();
+
+              if (deposit) {
+                player.getStash().deposit(player, candyType, candyQuantity);
+              } else {
+                player.getStash().withdraw(player, candyType, candyQuantity);
+              }
+            } else {
+              System.out.println("Not a candy");
             }
           }
         }

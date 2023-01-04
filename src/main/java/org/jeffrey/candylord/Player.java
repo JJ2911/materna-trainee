@@ -10,8 +10,9 @@ public class Player {
   private int cash = 2_000;
   private int debt = 0;
   private int day = 1;
-  private City city = new City(City.Location.BRONX);
-  private Bank bank = new Bank();
+  private final City city = new City(City.Location.BRONX);
+  private final Bank bank = new Bank();
+  private final Stash stash = new Stash();
   private final List<Candy> candies = new ArrayList<>();
 
   public Player() {
@@ -53,6 +54,10 @@ public class Player {
     return bank;
   }
 
+  public Stash getStash() {
+    return stash;
+  }
+
   public List<Candy> getCandies() {
     return candies;
   }
@@ -67,19 +72,14 @@ public class Player {
       if (quantity * price <= cash) {
         cash -= quantity * price;
 
-        for (Candy candy : candies) {
-          if (candy.getCandyType() == candyType) {
-            candy.setQuantity(candy.getQuantity() + quantity);
-            System.out.printf(
-                    "Your purchase of %d %s was successful.%n",
-                    quantity,
-                    candyType.getName()
-            );
-            return;
-          }
+        Candy candy = getCandy(candyType);
+
+        if (candy != null) {
+          candy.setQuantity(candy.getQuantity() + quantity);
+        } else {
+          candies.add(new Candy(candyType, quantity));
         }
 
-        candies.add(new Candy(candyType, quantity));
         System.out.printf(
                 "Your purchase of %d %s was successful.%n",
                 quantity,
@@ -99,26 +99,23 @@ public class Player {
       return;
     }
 
-    for (Candy candy : candies) {
-      if (candy.getCandyType() == candyType) {
-        if (quantity <= candy.getQuantity()) {
-          candy.setQuantity(candy.getQuantity() - quantity);
-          cash += quantity * price;
-          System.out.printf("Your sale of %d %s was successful.%n", quantity, candy.getName());
+    Candy candy = getCandy(candyType);
 
-          if (candy.getQuantity() == 0) {
-            candies.remove(candy);
-          }
+    if (candy != null) {
+      if (quantity <= candy.getQuantity()) {
+        candy.setQuantity(candy.getQuantity() - quantity);
+        cash += quantity * price;
+        System.out.printf("Your sale of %d %s was successful.%n", quantity, candy.getName());
 
-          return;
-        } else {
-          System.out.printf("Not enough %s on hand.%n", candy.getName());
-          return;
+        if (candy.getQuantity() == 0) {
+          candies.remove(candy);
         }
+      } else {
+        System.out.printf("Not enough %s on hand.%n", candy.getName());
       }
+    } else {
+      System.out.printf("You don't have %s.%n", candyType.getName());
     }
-
-    System.out.printf("You don't have %s.%n", candyType.getName());
   }
 
   public void travelTo(City.Location location, int price) {
@@ -142,14 +139,20 @@ public class Player {
     return sumOfCandies() + quantity <= MAX_CANDIES ? true : false;
   }
 
-  public int getCandyQuantity(Candy.CandyType candyType) {
+  public Candy getCandy(Candy.CandyType candyType) {
     for (Candy candy : candies) {
       if (candy.getCandyType() == candyType) {
-        return candy.getQuantity();
+        return candy;
       }
     }
 
-    return 0;
+    return null;
+  }
+
+  public int getCandyQuantity(Candy.CandyType candyType) {
+    Candy candy = getCandy(candyType);
+
+    return candy == null ? 0 : candy.getQuantity();
   }
 
   public int sumOfCandies() {
