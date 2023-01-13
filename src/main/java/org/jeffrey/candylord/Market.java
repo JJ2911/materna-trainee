@@ -4,17 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The market class calculates the candy prices.
+ *
+ * @author Jeffrey Liew
+ */
 public class Market {
   private final Map<Candy.CandyType, Integer> candyPrices = new HashMap<>();
 
+  /**
+   * Constructs a new <code>Market</code> that initializes candy prices.
+   */
   public Market() {
     calculateCandyPrices();
   }
 
+  /**
+   * Returns candy prices as a <code>Map</code>.
+   *
+   * @return candy prices
+   */
   public Map<Candy.CandyType, Integer> getCandyPrices() {
     return candyPrices;
   }
 
+  /**
+   * Calculate new random candy prices that are added to a <code>Map</code>.
+   */
   public void calculateCandyPrices() {
     ThreadLocalRandom current = ThreadLocalRandom.current();
     candyPrices.put(Candy.CandyType.MMS, current.nextInt(5_000, 10_000));

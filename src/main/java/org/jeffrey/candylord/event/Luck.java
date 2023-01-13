@@ -5,9 +5,17 @@ import org.jeffrey.candylord.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author Jeffrey Liew
+ */
 public class Luck extends Event {
   private final int MAX_FOUND_CANDIES = 10;
 
+  /**
+   * Adds a random candy to the player.
+   *
+   * @param player the player
+   */
   @Override
   public void process(Player player) {
     ThreadLocalRandom current = ThreadLocalRandom.current();

@@ -1,5 +1,10 @@
 package org.jeffrey.candylord;
 
+/**
+ * The player can borrow money and pay off the loan.
+ *
+ * @author Jeffrey Liew
+ */
 public class LoanShark {
   public static final double INTEREST_RATE = 10;
   private final int MINIMUM_LOAN = 1000;
@@ -8,6 +13,12 @@ public class LoanShark {
   public LoanShark() {
   }
 
+  /**
+   * Player gets a loan.
+   *
+   * @param player Player that borrows money
+   * @param amount the amount to borrow
+   */
   public void getLoan(Player player, int amount) {
     if (!City.Location.isInBronx(player)) {
       System.out.println("The loan shark is in the Bronx.");
@@ -30,6 +41,12 @@ public class LoanShark {
     }
   }
 
+  /**
+   * Player pays off loan.
+   *
+   * @param player Player that pays off the loan
+   * @param amount the amount to pay off
+   */
   public void payOffLoan(Player player, int amount) {
     if (!City.Location.isInBronx(player)) {
       System.out.println("The loan shark is in the Bronx.");

@@ -2,8 +2,19 @@ package org.jeffrey.candylord.util;
 
 import org.jeffrey.candylord.City;
 
+/**
+ * @author Jeffrey Liew
+ */
 public class DistanceUtils {
   private static final double pricePerKm = 0.10;
+
+  /**
+   * Returns the distance in km between two locations.
+   *
+   * @param location1 the first location
+   * @param location2 the second location
+   * @return the distance in km
+   */
   public static double distanceTo(City.Location location1, City.Location location2) {
     double lat1 = location1.getLat();
     double lon1 = location1.getLon();
@@ -25,6 +36,12 @@ public class DistanceUtils {
     return 2 * 6371 * Math.asin(Math.sqrt(a));
   }
 
+  /**
+   * Returns the travel price based on distance.
+   *
+   * @param distance the distance in km
+   * @return the price
+   */
   public static int calculateTravelPrice(double distance) {
     return (int) Math.round(distance * pricePerKm);
   }

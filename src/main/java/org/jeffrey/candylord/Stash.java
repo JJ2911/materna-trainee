@@ -3,16 +3,33 @@ package org.jeffrey.candylord;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The player can deposit or withdraw from the stash.
+ *
+ * @author Jeffrey Liew
+ */
 public class Stash {
   private final List<Candy> candies = new ArrayList<>();
 
   public Stash() {
   }
 
+  /**
+   * Returns the list of candies.
+   *
+   * @return List of candies
+   */
   public List<Candy> getCandies() {
     return candies;
   }
 
+  /**
+   * Deposit candies to the player's stash.
+   *
+   * @param player Player that deposits candies
+   * @param candyType Type of candy
+   * @param quantity Candy quantity to deposit
+   */
   public void deposit(Player player, Candy.CandyType candyType, int quantity) {
     if (!City.Location.isInBronx(player)) {
       System.out.println("Your stash is located in the Bronx.");
@@ -51,6 +68,13 @@ public class Stash {
     }
   }
 
+  /**
+   * Withdraw candies from the player's stash.
+   *
+   * @param player Player that withdraws candies
+   * @param candyType Type of candy
+   * @param quantity Candy quantity to withdraw
+   */
   public void withdraw(Player player, Candy.CandyType candyType, int quantity) {
     if (!City.Location.isInBronx(player)) {
       System.out.println("Your stash is located in the Bronx.");
@@ -89,6 +113,12 @@ public class Stash {
     }
   }
 
+  /**
+   * Returns a specific candy from stash.
+   *
+   * @param candyType Type of candy
+   * @return the candy from stash
+   */
   public Candy getCandyFromStash(Candy.CandyType candyType) {
     for (Candy candy : candies) {
       if (candy.getCandyType() == candyType) {
