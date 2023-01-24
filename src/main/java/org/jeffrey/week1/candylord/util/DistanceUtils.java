@@ -1,6 +1,6 @@
-package org.jeffrey.candylord.util;
+package org.jeffrey.week1.candylord.util;
 
-import org.jeffrey.candylord.City;
+import org.jeffrey.week1.candylord.City;
 
 /**
  * @author Jeffrey Liew

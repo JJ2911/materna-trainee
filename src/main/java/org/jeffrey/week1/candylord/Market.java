@@ -1,4 +1,4 @@
-package org.jeffrey.candylord;
+package org.jeffrey.week1.candylord;
 
 import java.util.HashMap;
 import java.util.Map;

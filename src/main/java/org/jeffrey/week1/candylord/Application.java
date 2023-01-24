@@ -1,6 +1,6 @@
-package org.jeffrey.candylord;
+package org.jeffrey.week1.candylord;
 
-import org.jeffrey.candylord.util.DistanceUtils;
+import org.jeffrey.week1.candylord.util.DistanceUtils;
 
 import java.util.HashMap;
 import java.util.Map;

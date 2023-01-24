@@ -1,6 +1,6 @@
-package org.jeffrey.candylord;
+package org.jeffrey.week1.candylord;
 
-import org.jeffrey.candylord.event.RandomGameEvents;
+import org.jeffrey.week1.candylord.event.RandomGameEvents;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.jeffrey.candylord;
+package org.jeffrey.week1.candylord;
 
 /**
  * The city class for setting the player's city.

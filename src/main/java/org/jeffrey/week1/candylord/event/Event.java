@@ -1,6 +1,6 @@
-package org.jeffrey.candylord.event;
+package org.jeffrey.week1.candylord.event;
 
-import org.jeffrey.candylord.Player;
+import org.jeffrey.week1.candylord.Player;
 
 /**
  * @author Jeffrey Liew

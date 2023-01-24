@@ -1,4 +1,4 @@
-package org.jeffrey.candylord;
+package org.jeffrey.week1.candylord;
 
 /**
  * The player can borrow money and pay off the loan.
